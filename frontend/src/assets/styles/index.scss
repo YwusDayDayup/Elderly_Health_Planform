@@ -1,0 +1,101 @@
+@use './variables' as *;
+@use './common' as *;
+@import 'element-plus/dist/index.css';
+
+:root {
+  // New Color System - Coral Orange Primary
+  --app-primary: #E85A3C;
+  --app-primary-hover: #C44A2E;
+  --app-primary-light: #FF7A5C;
+  --app-primary-bg: #FEF2EF;
+  --app-primary-bg-hover: #FDE8E2;
+
+  // Green Tones (sidebar & accents)
+  --app-green-dark: #1B4332;
+  --app-green-mid: #2D6A4F;
+  --app-green-light: #40916C;
+
+  // Accent
+  --app-accent: #D4A853;
+  --app-accent-light: #E8C88A;
+
+  // Neutrals - White levels
+  --app-white-50: #FAFAFA;
+  --app-white-100: #F5F5F5;
+  --app-white-200: #EEEEEE;
+  --app-white-300: #E0E0E0;
+  --app-white-400: #BDBDBD;
+  --app-white-500: #9E9E9E;
+  --app-white-600: #757575;
+  --app-white-700: #616161;
+  --app-white-800: #424242;
+  --app-white-900: #212121;
+
+  // Semantic colors
+  --app-bg: #F8F9FA;
+  --app-header-bg: rgba(255, 255, 255, 0.92);
+  --app-header-shadow: 0 8px 32px rgba(27, 67, 50, 0.06);
+  --app-surface: #FFFFFF;
+  --app-surface-muted: #F5F5F5;
+  --app-sidebar-bg: linear-gradient(180deg, #1B4332 0%, #2D6A4F 100%);
+  --app-sidebar-bg-solid: #1B4332;
+  --app-sidebar-bg-soft: #2D6A4F;
+  --app-sidebar-active-bg: rgba(232, 90, 60, 0.15);
+
+  --app-text-primary: #212121;
+  --app-text-secondary: #616161;
+  --app-text-muted: #9E9E9E;
+  --app-text-on-dark: #FFFFFF;
+  --app-text-on-dark-muted: rgba(255, 255, 255, 0.72);
+
+  --app-border-color: #EEEEEE;
+  --app-border-color-light: #F5F5F5;
+  --app-hover-bg: #F5F5F5;
+
+  --app-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --app-card-radius: 18px;
+  --app-card-radius-lg: 24px;
+
+  --app-success: #10B981;
+  --app-warning: #F59E0B;
+  --app-danger: #EF4444;
+  --app-info: #3B82F6;
+}
+
+html.dark {
+  color-scheme: dark;
+  --app-bg: #0F1419;
+  --app-header-bg: #1A1F26;
+  --app-header-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --app-surface: #1A1F26;
+  --app-surface-muted: #232A34;
+  --app-sidebar-bg: linear-gradient(180deg, #0D1F17 0%, #1B4332 100%);
+  --app-sidebar-bg-solid: #0D1F17;
+  --app-sidebar-bg-soft: #1B4332;
+  --app-sidebar-active-bg: rgba(232, 90, 60, 0.2);
+  --app-primary: #FF7A5C;
+  --app-primary-hover: #E85A3C;
+  --app-primary-light: #FFAA8C;
+  --app-primary-bg: rgba(232, 90, 60, 0.12);
+  --app-accent: #D4A853;
+  --app-text-primary: #F5F5F5;
+  --app-text-secondary: #BDBDBD;
+  --app-text-muted: #757575;
+  --app-text-on-dark: #FFFFFF;
+  --app-text-on-dark-muted: rgba(255, 255, 255, 0.6);
+  --app-border-color: #2D3748;
+  --app-hover-bg: #232A34;
+  --app-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: var(--app-bg);
+  color: var(--app-text-primary);
+}

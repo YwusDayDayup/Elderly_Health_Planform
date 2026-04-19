@@ -1,0 +1,13 @@
+spring:
+  devtools:
+    livereload:
+      enabled: true
+      port: ${DEVTOOLS_LIVERELOAD_PORT:38080}
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+app:
+  seed:
+    enabled: true

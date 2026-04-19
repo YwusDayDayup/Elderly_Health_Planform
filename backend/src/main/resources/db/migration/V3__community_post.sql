@@ -1,0 +1,21 @@
+create table if not exists t_community_post (
+  id bigint not null auto_increment,
+  author_id bigint not null,
+  author_name varchar(64) not null,
+  title varchar(128) not null,
+  content text not null,
+  category varchar(32) not null,
+  post_status varchar(32) not null default 'PUBLISHED',
+  audit_status varchar(32) not null default 'APPROVED',
+  comment_count int not null default 0,
+  like_count int not null default 0,
+  view_count int not null default 0,
+  last_action varchar(64) null,
+  last_action_time datetime(3) null,
+  create_time datetime(3) not null default current_timestamp(3),
+  update_time datetime(3) not null default current_timestamp(3) on update current_timestamp(3),
+  primary key (id),
+  key idx_community_post_author_id (author_id),
+  key idx_community_post_category (category),
+  key idx_community_post_audit_status (audit_status)
+) engine=InnoDB default charset=utf8mb4;

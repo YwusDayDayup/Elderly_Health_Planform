@@ -135,25 +135,32 @@ Elderly_Health/
 
 ```powershell
 # 1. 克隆项目
-git clone git@github.com:YwusDayDayup/Elderly_Health.git
-cd Elderly_Health
+git clone git@github.com:YwusDayDayup/Elderly_Health_Planform.git
+cd Elderly_Health_Planform
 
-# 2. 创建数据库（只需执行一次）
-mysql -uroot -p123456 -e "CREATE DATABASE IF NOT EXISTS \`154laoren\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+# 2. 一键安装依赖 + 初始化数据库
+.\setup.ps1
+```
 
-# 3. 一键安装依赖 + 推送
-.\setup_and_push.ps1
+如需自定义数据库连接参数：
+
+```powershell
+.\setup.ps1 -MysqlUser root -MysqlPassword 你的密码 -DbName 154laoren
 ```
 
 **Linux / Mac（Bash）**
 
 ```bash
-git clone git@github.com:YwusDayDayup/Elderly_Health.git
-cd Elderly_Health
+git clone git@github.com:YwusDayDayup/Elderly_Health_Planform.git
+cd Elderly_Health_Planform
 
-mysql -uroot -p123456 -e "CREATE DATABASE IF NOT EXISTS \`154laoren\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+bash setup.sh
+```
 
-bash setup_and_push.sh
+如需自定义数据库连接参数：
+
+```bash
+MYSQL_USER=root MYSQL_PASSWORD=你的密码 bash setup.sh
 ```
 
 ---

@@ -52,6 +52,17 @@
             </template>
           </el-table-column>
         </el-table>
+        <div class="page-pagination-right">
+          <el-pagination
+            v-model:current-page="query.pageNo"
+            v-model:page-size="query.pageSize"
+            :total="total"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            @size-change="handleSizeChange"
+            @current-change="fetchContents"
+          />
+        </div>
       </div>
     </div>
 
@@ -110,7 +121,8 @@ import {
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 const contents = ref<ContentVO[]>([])
-const query = reactive({ keyword: '', type: '' })
+const total = ref(0)
+const query = reactive({ keyword: '', type: '', pageNo: 1, pageSize: 10 })
 const dialogVisible = ref(false)
 const detailVisible = ref(false)
 const currentContent = ref<ContentVO | null>(null)
@@ -123,8 +135,16 @@ const form = reactive<ContentReq & { id?: number }>({
 })
 
 const fetchContents = async () => {
-  const res = await listAdminContents({ pageNo: 1, pageSize: 100, ...query })
-  if (res.success) contents.value = res.data.list
+  const res = await listAdminContents(query)
+  if (res.success) {
+    contents.value = res.data.list
+    total.value = res.data.total
+  }
+}
+
+const handleSizeChange = (size: number) => {
+  query.pageSize = size
+  fetchContents()
 }
 
 const openDialog = (row?: ContentVO) => {

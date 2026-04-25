@@ -91,6 +91,10 @@
           <el-select v-model="sendForm.msgType" placeholder="选择通知类型" style="width: 100%">
             <el-option label="系统通知" value="SYSTEM" />
             <el-option label="普通通知" value="NOTICE" />
+            <el-option label="服务订单" value="SERVICE_ORDER" />
+            <el-option label="家属绑定" value="FAMILY_BINDING" />
+            <el-option label="健康预警" value="HEALTH_ALERT" />
+            <el-option label="支付通知" value="PAYMENT" />
           </el-select>
         </el-form-item>
         <el-form-item label="标题">
@@ -115,7 +119,7 @@
         </el-descriptions-item>
         <el-descriptions-item label="发送时间">{{ currentMsg.createTime }}</el-descriptions-item>
         <el-descriptions-item label="标题" :span="2">{{ currentMsg.title }}</el-descriptions-item>
-        <el-descriptions-item label="内容" :span="2">{{ currentMsg.content }}</el-descriptions-item>
+        <el-descriptions-item label="内容" :span="2">{{ formatMessageContent(currentMsg.content) }}</el-descriptions-item>
       </el-descriptions>
     </el-dialog>
   </div>
@@ -255,8 +259,62 @@ const msgTypeLabel = (type: string) => {
     SYSTEM: '系统通知',
     NOTICE: '普通通知',
     ALERT: '预警通知',
+    SERVICE_ORDER: '服务订单',
+    FAMILY_BINDING: '家属绑定',
+    HEALTH_ALERT: '健康预警',
+    PAYMENT: '支付通知',
   }
   return map[type] || type
+}
+
+// 处理消息内容中的状态码，将英文替换为中文
+const formatMessageContent = (content: string) => {
+  if (!content) return content
+  
+  // 订单状态映射
+  const orderStatusMap: Record<string, string> = {
+    'PENDING_PAYMENT': '待支付',
+    'PENDING_ASSIGN': '待派单',
+    'PENDING_ACCEPT': '待接单',
+    'PENDING_SERVICE': '待上门',
+    'IN_SERVICE': '服务中',
+    'COMPLETED': '已完成',
+    'CANCELLED': '已取消',
+    'REFUNDED': '已退款',
+  }
+  
+  // 绑定状态映射
+  const bindingStatusMap: Record<string, string> = {
+    'ACTIVE': '已绑定',
+    'PENDING': '待审核',
+    'REJECTED': '已拒绝',
+  }
+  
+  // 支付状态映射
+  const payStatusMap: Record<string, string> = {
+    'UNPAID': '未支付',
+    'PAID': '已支付',
+    'REFUNDED': '已退款',
+  }
+  
+  let result = content
+  
+  // 替换订单状态
+  Object.entries(orderStatusMap).forEach(([key, value]) => {
+    result = result.replace(new RegExp(key, 'g'), value)
+  })
+  
+  // 替换绑定状态
+  Object.entries(bindingStatusMap).forEach(([key, value]) => {
+    result = result.replace(new RegExp(key, 'g'), value)
+  })
+  
+  // 替换支付状态
+  Object.entries(payStatusMap).forEach(([key, value]) => {
+    result = result.replace(new RegExp(key, 'g'), value)
+  })
+  
+  return result
 }
 
 onMounted(fetchMessages)

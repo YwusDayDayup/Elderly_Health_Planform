@@ -208,7 +208,7 @@ router.beforeEach((to, _from, next) => {
 router.afterEach((to) => {
   NProgress.done()
   if (to.meta.title) {
-    document.title = `${to.meta.title} - 管理系统`
+    document.title = `${to.meta.title} - 慧养家园`
   }
 })
 

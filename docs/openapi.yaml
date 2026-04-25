@@ -1,0 +1,3383 @@
+openapi: 3.0.1
+info:
+  title: example API
+  version: v1
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+security:
+- BearerAuth: []
+paths:
+  /api/me/staff-profile:
+    get:
+      tags:
+      - care-me-controller
+      operationId: myStaffProfile
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultStaffProfileVO"
+    put:
+      tags:
+      - care-me-controller
+      operationId: saveMyStaffProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffProfileReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultStaffProfileVO"
+  /api/me/safe-zone:
+    get:
+      tags:
+      - care-me-controller
+      operationId: safeZone
+      parameters:
+      - name: targetUserId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultSafeZoneVO"
+    put:
+      tags:
+      - care-me-controller
+      operationId: saveSafeZone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SafeZoneReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultSafeZoneVO"
+  /api/me/profile:
+    get:
+      tags:
+      - user-controller
+      operationId: profile
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultProfileVO"
+    put:
+      tags:
+      - user-controller
+      operationId: updateProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProfileReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/me/password:
+    put:
+      tags:
+      - user-controller
+      operationId: updatePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePasswordReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/me/elder-profile:
+    get:
+      tags:
+      - care-me-controller
+      operationId: myElderProfile
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultElderProfileVO"
+    put:
+      tags:
+      - care-me-controller
+      operationId: saveMyElderProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElderProfileReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultElderProfileVO"
+  /api/admin/user/{id}:
+    get:
+      tags:
+      - user-admin-controller
+      operationId: detail
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultAdminUserDetailVO"
+    put:
+      tags:
+      - user-admin-controller
+      operationId: update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminUpdateReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+    delete:
+      tags:
+      - user-admin-controller
+      operationId: delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/admin/messages/{id}:
+    get:
+      tags:
+      - msg-controller
+      operationId: detail_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultMsgEntity"
+    put:
+      tags:
+      - msg-controller
+      operationId: update_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MsgEntity"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+    delete:
+      tags:
+      - msg-controller
+      operationId: delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/admin/care/service-projects/{id}:
+    put:
+      tags:
+      - care-admin-controller
+      operationId: updateServiceProject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceProjectReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+    delete:
+      tags:
+      - care-admin-controller
+      operationId: deleteServiceProject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/admin/care/service-categories/{id}:
+    put:
+      tags:
+      - care-admin-controller
+      operationId: updateServiceCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceCategoryReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+    delete:
+      tags:
+      - care-admin-controller
+      operationId: deleteServiceCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/admin/care/contents/{id}:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: contentDetail_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultContentVO"
+    put:
+      tags:
+      - care-admin-controller
+      operationId: updateContent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContentReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+    delete:
+      tags:
+      - care-admin-controller
+      operationId: deleteContent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/public/register:
+    post:
+      tags:
+      - user-controller
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultLoginResp"
+  /api/public/logout:
+    post:
+      tags:
+      - user-controller
+      operationId: logout
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/public/login:
+    post:
+      tags:
+      - user-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultLoginResp"
+  /api/me/service-orders:
+    get:
+      tags:
+      - care-me-controller
+      operationId: myOrders
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultServiceOrderVO"
+    post:
+      tags:
+      - care-me-controller
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrderReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultServiceOrderVO"
+  /api/me/service-orders/{id}/start:
+    post:
+      tags:
+      - care-me-controller
+      operationId: startOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultServiceOrderVO"
+  /api/me/service-orders/{id}/rate:
+    post:
+      tags:
+      - care-me-controller
+      operationId: rateOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RateOrderReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultServiceOrderVO"
+  /api/me/service-orders/{id}/pay:
+    post:
+      tags:
+      - care-me-controller
+      operationId: payOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultServiceOrderVO"
+  /api/me/service-orders/{id}/complete:
+    post:
+      tags:
+      - care-me-controller
+      operationId: completeOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultServiceOrderVO"
+  /api/me/service-orders/{id}/cancel:
+    post:
+      tags:
+      - care-me-controller
+      operationId: cancelOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultServiceOrderVO"
+  /api/me/service-orders/{id}/accept:
+    post:
+      tags:
+      - care-me-controller
+      operationId: acceptOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultServiceOrderVO"
+  /api/me/message-read-batches:
+    post:
+      tags:
+      - msg-me-controller
+      operationId: markReadAll
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/me/locations:
+    post:
+      tags:
+      - care-me-controller
+      operationId: reportLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LocationReportReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultLocationVO"
+  /api/me/health-records:
+    get:
+      tags:
+      - care-me-controller
+      operationId: myHealthRecords
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: targetUserId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultHealthRecordVO"
+    post:
+      tags:
+      - care-me-controller
+      operationId: createHealthRecord
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealthRecordReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultHealthRecordVO"
+  /api/me/files:
+    post:
+      tags:
+      - file-controller
+      operationId: upload
+      parameters:
+      - name: bizType
+        in: query
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultUploadResp"
+  /api/me/family-bindings:
+    get:
+      tags:
+      - care-me-controller
+      operationId: myBindings
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultFamilyBindingVO"
+    post:
+      tags:
+      - care-me-controller
+      operationId: createBinding
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FamilyBindingReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultFamilyBindingVO"
+  /api/me/family-bindings/{id}/audit:
+    post:
+      tags:
+      - care-me-controller
+      operationId: auditBinding
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FamilyBindingAuditReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultFamilyBindingVO"
+  /api/admin/user:
+    get:
+      tags:
+      - user-admin-controller
+      operationId: page
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: role
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultAdminUserVO"
+    post:
+      tags:
+      - user-admin-controller
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminCreateReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/admin/user/page:
+    post:
+      tags:
+      - user-admin-controller
+      operationId: pagePost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminPageReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultAdminUserVO"
+  /api/admin/messages:
+    get:
+      tags:
+      - msg-controller
+      operationId: page_1
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultMsgEntity"
+    post:
+      tags:
+      - msg-controller
+      operationId: create_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MsgEntity"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultLong"
+  /api/admin/messages/broadcast:
+    post:
+      tags:
+      - msg-controller
+      operationId: broadcast
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BroadcastReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/admin/care/staff-profiles/{id}/audit:
+    post:
+      tags:
+      - care-admin-controller
+      operationId: auditStaff
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffAuditReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/admin/care/service-projects:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: serviceProjects_1
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: categoryId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultServiceProjectVO"
+    post:
+      tags:
+      - care-admin-controller
+      operationId: createServiceProject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceProjectReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/admin/care/service-orders/{id}/assign:
+    post:
+      tags:
+      - care-admin-controller
+      operationId: assignOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignOrderReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultServiceOrderVO"
+  /api/admin/care/service-categories:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: serviceCategories_1
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultListServiceCategoryVO"
+    post:
+      tags:
+      - care-admin-controller
+      operationId: createServiceCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceCategoryReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/admin/care/contents:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: contents_1
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultContentVO"
+    post:
+      tags:
+      - care-admin-controller
+      operationId: createContent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContentReq"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/me/messages/{id}/read:
+    patch:
+      tags:
+      - msg-me-controller
+      operationId: markRead
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+  /api/statistics/trend:
+    get:
+      tags:
+      - statistics-controller
+      operationId: trend
+      parameters:
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 7
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultTrendVO"
+  /api/statistics/overview:
+    get:
+      tags:
+      - statistics-controller
+      operationId: overview
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultOverviewVO"
+  /api/public/service-projects:
+    get:
+      tags:
+      - care-public-controller
+      operationId: serviceProjects
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: categoryId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultServiceProjectVO"
+  /api/public/service-projects/{id}:
+    get:
+      tags:
+      - care-public-controller
+      operationId: serviceProjectDetail
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultServiceProjectVO"
+  /api/public/service-categories:
+    get:
+      tags:
+      - care-public-controller
+      operationId: serviceCategories
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultListServiceCategoryVO"
+  /api/public/contents:
+    get:
+      tags:
+      - care-public-controller
+      operationId: contents
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultContentVO"
+  /api/public/contents/{id}:
+    get:
+      tags:
+      - care-public-controller
+      operationId: contentDetail
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultContentVO"
+  /api/me/roles:
+    get:
+      tags:
+      - user-controller
+      operationId: myRoles
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultRolesVO"
+  /api/me/messages:
+    get:
+      tags:
+      - msg-me-controller
+      operationId: myList
+      parameters:
+      - name: readFlag
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultListMsgVO"
+  /api/me/messages/{id}:
+    get:
+      tags:
+      - msg-me-controller
+      operationId: myDetail
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultMsgVO"
+  /api/me/messages/unread-count:
+    get:
+      tags:
+      - msg-me-controller
+      operationId: unreadCount
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultUnreadCountVO"
+  /api/me/locations/latest:
+    get:
+      tags:
+      - care-me-controller
+      operationId: latestLocation
+      parameters:
+      - name: targetUserId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultLocationVO"
+  /api/me/dashboard:
+    get:
+      tags:
+      - care-me-controller
+      operationId: dashboard
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultDashboardVO"
+  /api/admin/care/staff-profiles:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: staffProfiles
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultStaffProfileVO"
+  /api/admin/care/service-orders:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: serviceOrders
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultServiceOrderVO"
+  /api/admin/care/op-logs:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: opLogs
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultOpLogVO"
+  /api/admin/care/health-alerts:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: healthAlerts
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultHealthAlertVO"
+  /api/admin/care/family-bindings:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: familyBindings
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultFamilyBindingVO"
+  /api/admin/care/external-call-logs:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: externalCallLogs
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultExternalCallLogVO"
+  /api/admin/care/elder-profiles:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: elderProfiles
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultElderProfileVO"
+  /api/admin/care/dashboard:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: dashboard_1
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultDashboardVO"
+  /api/admin/care/community-posts:
+    get:
+      tags:
+      - care-admin-controller
+      operationId: communityPosts
+      parameters:
+      - name: pageNo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultPageResultCommunityPostVO"
+  /api/me/family-bindings/{id}:
+    delete:
+      tags:
+      - care-me-controller
+      operationId: deleteBinding
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResultVoid"
+components:
+  schemas:
+    StaffProfileReq:
+      type: object
+      properties:
+        realName:
+          type: string
+        certificateNo:
+          type: string
+        specialty:
+          type: string
+        serviceRadiusKm:
+          type: integer
+          format: int32
+        intro:
+          type: string
+    ResultStaffProfileVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/StaffProfileVO"
+    StaffProfileVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        username:
+          type: string
+        nickname:
+          type: string
+        phone:
+          type: string
+        realName:
+          type: string
+        certificateNo:
+          type: string
+        specialty:
+          type: string
+        serviceRadiusKm:
+          type: integer
+          format: int32
+        intro:
+          type: string
+        auditStatus:
+          type: string
+    SafeZoneReq:
+      type: object
+      properties:
+        centerLatitude:
+          type: number
+        centerLongitude:
+          type: number
+        radiusMeters:
+          type: integer
+          format: int32
+        address:
+          type: string
+    ResultSafeZoneVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/SafeZoneVO"
+    SafeZoneVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        centerLatitude:
+          type: number
+        centerLongitude:
+          type: number
+        radiusMeters:
+          type: integer
+          format: int32
+        address:
+          type: string
+    UpdateProfileReq:
+      type: object
+      properties:
+        nickname:
+          type: string
+        avatarUrl:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: integer
+          format: int32
+        birthday:
+          type: string
+          format: date
+        bio:
+          type: string
+        signature:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+    ResultVoid:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+    UpdatePasswordReq:
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+    ElderProfileReq:
+      type: object
+      properties:
+        realName:
+          type: string
+        idCard:
+          type: string
+        emergencyContactName:
+          type: string
+        emergencyContactPhone:
+          type: string
+        address:
+          type: string
+        healthNotes:
+          type: string
+        familyHealthAuthorized:
+          type: integer
+          format: int32
+        familyLocationAuthorized:
+          type: integer
+          format: int32
+    ElderProfileVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        username:
+          type: string
+        nickname:
+          type: string
+        phone:
+          type: string
+        realName:
+          type: string
+        idCard:
+          type: string
+        emergencyContactName:
+          type: string
+        emergencyContactPhone:
+          type: string
+        address:
+          type: string
+        healthNotes:
+          type: string
+        familyHealthAuthorized:
+          type: integer
+          format: int32
+        familyLocationAuthorized:
+          type: integer
+          format: int32
+    ResultElderProfileVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/ElderProfileVO"
+    AdminUpdateReq:
+      type: object
+      properties:
+        nickname:
+          type: string
+        avatarUrl:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: integer
+          format: int32
+        birthday:
+          type: string
+          format: date
+        bio:
+          type: string
+        signature:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        status:
+          type: integer
+          format: int32
+        role:
+          type: string
+    MsgEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        createTime:
+          type: string
+          format: date-time
+        updateTime:
+          type: string
+          format: date-time
+        senderId:
+          type: integer
+          format: int64
+        receiverId:
+          type: integer
+          format: int64
+        msgType:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        bizId:
+          type: string
+        readFlag:
+          type: integer
+          format: int32
+        readTime:
+          type: string
+          format: date-time
+    ServiceProjectReq:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        unit:
+          type: string
+        status:
+          type: integer
+          format: int32
+        coverUrl:
+          type: string
+        defaultStaffUserId:
+          type: integer
+          format: int64
+        serviceDurationMinutes:
+          type: integer
+          format: int32
+    ServiceCategoryReq:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+        description:
+          type: string
+        sortNo:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+    ContentReq:
+      type: object
+      properties:
+        contentType:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        content:
+          type: string
+        coverUrl:
+          type: string
+        status:
+          type: integer
+          format: int32
+    RegisterReq:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+        nickname:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: integer
+          format: int32
+        birthday:
+          type: string
+          format: date
+        bio:
+          type: string
+        signature:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+    LoginResp:
+      type: object
+      properties:
+        token:
+          type: string
+    ResultLoginResp:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/LoginResp"
+    LoginReq:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    CreateOrderReq:
+      type: object
+      properties:
+        elderUserId:
+          type: integer
+          format: int64
+        serviceProjectId:
+          type: integer
+          format: int64
+        serviceTime:
+          type: string
+          format: date-time
+        serviceAddress:
+          type: string
+        contactName:
+          type: string
+        contactPhone:
+          type: string
+        remark:
+          type: string
+    ResultServiceOrderVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/ServiceOrderVO"
+    ServiceOrderVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        orderNo:
+          type: string
+        elderUserId:
+          type: integer
+          format: int64
+        elderName:
+          type: string
+        familyUserId:
+          type: integer
+          format: int64
+        familyName:
+          type: string
+        staffUserId:
+          type: integer
+          format: int64
+        staffName:
+          type: string
+        serviceProjectId:
+          type: integer
+          format: int64
+        serviceName:
+          type: string
+        categoryName:
+          type: string
+        serviceTime:
+          type: string
+          format: date-time
+        serviceAddress:
+          type: string
+        contactName:
+          type: string
+        contactPhone:
+          type: string
+        remark:
+          type: string
+        amount:
+          type: number
+        payStatus:
+          type: string
+        orderStatus:
+          type: string
+        paymentTime:
+          type: string
+          format: date-time
+        acceptTime:
+          type: string
+          format: date-time
+        startTime:
+          type: string
+          format: date-time
+        finishTime:
+          type: string
+          format: date-time
+        rating:
+          type: integer
+          format: int32
+        ratingContent:
+          type: string
+        createTime:
+          type: string
+          format: date-time
+    RateOrderReq:
+      type: object
+      properties:
+        rating:
+          type: integer
+          format: int32
+        ratingContent:
+          type: string
+    LocationReportReq:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+        address:
+          type: string
+    LocationVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        username:
+          type: string
+        nickname:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        address:
+          type: string
+        withinZone:
+          type: integer
+          format: int32
+        createTime:
+          type: string
+          format: date-time
+    ResultLocationVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/LocationVO"
+    HealthRecordReq:
+      type: object
+      properties:
+        recordDate:
+          type: string
+          format: date
+        weight:
+          type: number
+        systolicBp:
+          type: integer
+          format: int32
+        diastolicBp:
+          type: integer
+          format: int32
+        bloodSugar:
+          type: number
+        bloodLipid:
+          type: number
+        pulse:
+          type: integer
+          format: int32
+        bodyTemp:
+          type: number
+        checkInFlag:
+          type: integer
+          format: int32
+        note:
+          type: string
+    HealthRecordVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        username:
+          type: string
+        nickname:
+          type: string
+        recordDate:
+          type: string
+          format: date
+        weight:
+          type: number
+        systolicBp:
+          type: integer
+          format: int32
+        diastolicBp:
+          type: integer
+          format: int32
+        bloodSugar:
+          type: number
+        bloodLipid:
+          type: number
+        pulse:
+          type: integer
+          format: int32
+        bodyTemp:
+          type: number
+        checkInFlag:
+          type: integer
+          format: int32
+        note:
+          type: string
+        abnormalFlag:
+          type: integer
+          format: int32
+        createTime:
+          type: string
+          format: date-time
+    ResultHealthRecordVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/HealthRecordVO"
+    ResultUploadResp:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/UploadResp"
+    UploadResp:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+        originalName:
+          type: string
+        size:
+          type: integer
+          format: int64
+    FamilyBindingReq:
+      type: object
+      properties:
+        elderUserId:
+          type: integer
+          format: int64
+        familyUserId:
+          type: integer
+          format: int64
+        relationLabel:
+          type: string
+        healthAccess:
+          type: integer
+          format: int32
+        locationAccess:
+          type: integer
+          format: int32
+        remark:
+          type: string
+    FamilyBindingVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        elderUserId:
+          type: integer
+          format: int64
+        elderName:
+          type: string
+        familyUserId:
+          type: integer
+          format: int64
+        familyName:
+          type: string
+        relationLabel:
+          type: string
+        status:
+          type: string
+        healthAccess:
+          type: integer
+          format: int32
+        locationAccess:
+          type: integer
+          format: int32
+        remark:
+          type: string
+        createTime:
+          type: string
+          format: date-time
+    ResultFamilyBindingVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/FamilyBindingVO"
+    FamilyBindingAuditReq:
+      type: object
+      properties:
+        approved:
+          type: boolean
+    AdminCreateReq:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        nickname:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: integer
+          format: int32
+        birthday:
+          type: string
+          format: date
+        bio:
+          type: string
+        signature:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        status:
+          type: integer
+          format: int32
+        role:
+          type: string
+    AdminPageReq:
+      type: object
+      properties:
+        pageNo:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int64
+        keyword:
+          type: string
+        status:
+          type: integer
+          format: int32
+        role:
+          type: string
+    AdminUserVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        nickname:
+          type: string
+        avatarUrl:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: integer
+          format: int32
+        region:
+          type: string
+        city:
+          type: string
+        status:
+          type: integer
+          format: int32
+    PageResultAdminUserVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/AdminUserVO"
+    ResultPageResultAdminUserVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultAdminUserVO"
+    ResultLong:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          type: integer
+          format: int64
+    BroadcastReq:
+      type: object
+      properties:
+        msgType:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        bizId:
+          type: string
+    StaffAuditReq:
+      type: object
+      properties:
+        auditStatus:
+          type: string
+    AssignOrderReq:
+      type: object
+      properties:
+        staffUserId:
+          type: integer
+          format: int64
+    ResultTrendVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/TrendVO"
+    TrendDayVO:
+      type: object
+      properties:
+        day:
+          type: string
+        userCount:
+          type: integer
+          format: int64
+        fileCount:
+          type: integer
+          format: int64
+        msgCount:
+          type: integer
+          format: int64
+    TrendVO:
+      type: object
+      properties:
+        days:
+          type: integer
+          format: int32
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/TrendDayVO"
+    NameCountRow:
+      type: object
+      properties:
+        name:
+          type: string
+        count:
+          type: integer
+          format: int64
+    OverviewVO:
+      type: object
+      properties:
+        totalUsers:
+          type: integer
+          format: int64
+        todayNewUsers:
+          type: integer
+          format: int64
+        roleDistribution:
+          type: array
+          items:
+            $ref: "#/components/schemas/NameCountRow"
+        totalFiles:
+          type: integer
+          format: int64
+        totalFileSize:
+          type: integer
+          format: int64
+        fileTypeDistribution:
+          type: array
+          items:
+            $ref: "#/components/schemas/NameCountRow"
+        totalMsgs:
+          type: integer
+          format: int64
+        totalUnreadMsgs:
+          type: integer
+          format: int64
+        system:
+          $ref: "#/components/schemas/SystemVO"
+    ResultOverviewVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/OverviewVO"
+    SystemVO:
+      type: object
+      properties:
+        systemCpuLoad:
+          type: number
+          format: double
+        jvmUsedMemory:
+          type: integer
+          format: int64
+        jvmMaxMemory:
+          type: integer
+          format: int64
+        uptimeMs:
+          type: integer
+          format: int64
+        dbActive:
+          type: integer
+          format: int32
+        dbIdle:
+          type: integer
+          format: int32
+        dbTotal:
+          type: integer
+          format: int32
+        dbThreadsAwaiting:
+          type: integer
+          format: int32
+        redisOk:
+          type: boolean
+    PageResultServiceProjectVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceProjectVO"
+    ResultPageResultServiceProjectVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultServiceProjectVO"
+    ServiceProjectVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        categoryId:
+          type: integer
+          format: int64
+        categoryName:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        unit:
+          type: string
+        status:
+          type: integer
+          format: int32
+        coverUrl:
+          type: string
+        defaultStaffUserId:
+          type: integer
+          format: int64
+        defaultStaffName:
+          type: string
+        serviceDurationMinutes:
+          type: integer
+          format: int32
+    ResultServiceProjectVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/ServiceProjectVO"
+    ResultListServiceCategoryVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceCategoryVO"
+    ServiceCategoryVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        code:
+          type: string
+        description:
+          type: string
+        sortNo:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+    ContentVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        contentType:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        content:
+          type: string
+        coverUrl:
+          type: string
+        status:
+          type: integer
+          format: int32
+        authorName:
+          type: string
+        publishedAt:
+          type: string
+          format: date-time
+        viewCount:
+          type: integer
+          format: int64
+    PageResultContentVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContentVO"
+    ResultPageResultContentVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultContentVO"
+    ResultContentVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/ContentVO"
+    PageResultServiceOrderVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceOrderVO"
+    ResultPageResultServiceOrderVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultServiceOrderVO"
+    ResultRolesVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/RolesVO"
+    RolesVO:
+      type: object
+      properties:
+        role:
+          type: string
+    ProfileVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        nickname:
+          type: string
+        avatarUrl:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: integer
+          format: int32
+        birthday:
+          type: string
+          format: date
+        bio:
+          type: string
+        signature:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+    ResultProfileVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/ProfileVO"
+    MsgVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        msgType:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        bizId:
+          type: string
+        readFlag:
+          type: integer
+          format: int32
+        readTime:
+          type: string
+          format: date-time
+        createTime:
+          type: string
+          format: date-time
+    ResultListMsgVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/MsgVO"
+    ResultMsgVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/MsgVO"
+    ResultUnreadCountVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/UnreadCountVO"
+    UnreadCountVO:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+    PageResultHealthRecordVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/HealthRecordVO"
+    ResultPageResultHealthRecordVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultHealthRecordVO"
+    PageResultFamilyBindingVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/FamilyBindingVO"
+    ResultPageResultFamilyBindingVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultFamilyBindingVO"
+    DashboardVO:
+      type: object
+      properties:
+        role:
+          type: string
+        title:
+          type: string
+        metrics:
+          type: array
+          items:
+            $ref: "#/components/schemas/MetricVO"
+        latestContents:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContentVO"
+        latestOrders:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceOrderVO"
+        latestAlerts:
+          type: array
+          items:
+            $ref: "#/components/schemas/HealthAlertVO"
+        latestBindings:
+          type: array
+          items:
+            $ref: "#/components/schemas/FamilyBindingVO"
+    HealthAlertVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        username:
+          type: string
+        nickname:
+          type: string
+        recordId:
+          type: integer
+          format: int64
+        alertType:
+          type: string
+        alertLevel:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        status:
+          type: string
+        createTime:
+          type: string
+          format: date-time
+    MetricVO:
+      type: object
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+        trend:
+          type: string
+    ResultDashboardVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/DashboardVO"
+    AdminUserDetailVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        nickname:
+          type: string
+        avatarUrl:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: integer
+          format: int32
+        birthday:
+          type: string
+          format: date
+        bio:
+          type: string
+        signature:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        status:
+          type: integer
+          format: int32
+        role:
+          type: string
+    ResultAdminUserDetailVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/AdminUserDetailVO"
+    PageResultMsgEntity:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/MsgEntity"
+    ResultPageResultMsgEntity:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultMsgEntity"
+    ResultMsgEntity:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/MsgEntity"
+    PageResultStaffProfileVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/StaffProfileVO"
+    ResultPageResultStaffProfileVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultStaffProfileVO"
+    OpLogVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        username:
+          type: string
+        action:
+          type: string
+        method:
+          type: string
+        path:
+          type: string
+        success:
+          type: integer
+          format: int32
+        errorMsg:
+          type: string
+        costMs:
+          type: integer
+          format: int64
+        createTime:
+          type: string
+          format: date-time
+    PageResultOpLogVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/OpLogVO"
+    ResultPageResultOpLogVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultOpLogVO"
+    PageResultHealthAlertVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/HealthAlertVO"
+    ResultPageResultHealthAlertVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultHealthAlertVO"
+    ExternalCallLogVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        providerType:
+          type: string
+        action:
+          type: string
+        bizType:
+          type: string
+        bizId:
+          type: string
+        reqJson:
+          type: string
+        respJson:
+          type: string
+        success:
+          type: integer
+          format: int32
+        createTime:
+          type: string
+          format: date-time
+    PageResultExternalCallLogVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExternalCallLogVO"
+    ResultPageResultExternalCallLogVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultExternalCallLogVO"
+    PageResultElderProfileVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/ElderProfileVO"
+    ResultPageResultElderProfileVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultElderProfileVO"
+    CommunityPostVO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        authorId:
+          type: integer
+          format: int64
+        authorName:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        category:
+          type: string
+        postStatus:
+          type: string
+        auditStatus:
+          type: string
+        commentCount:
+          type: integer
+          format: int32
+        likeCount:
+          type: integer
+          format: int32
+        viewCount:
+          type: integer
+          format: int32
+        lastAction:
+          type: string
+        lastActionTime:
+          type: string
+          format: date-time
+        createTime:
+          type: string
+          format: date-time
+    PageResultCommunityPostVO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/CommunityPostVO"
+    ResultPageResultCommunityPostVO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/PageResultCommunityPostVO"
+  securitySchemes:
+    BearerAuth:
+      type: http
+      name: BearerAuth
+      scheme: bearer

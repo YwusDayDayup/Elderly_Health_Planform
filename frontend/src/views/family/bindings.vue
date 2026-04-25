@@ -21,9 +21,24 @@
           <el-table :data="bindings">
             <el-table-column prop="elderName" label="老人" width="120" />
             <el-table-column prop="relationLabel" label="关系" width="120" />
-            <el-table-column prop="status" label="状态" width="120" />
+            <el-table-column prop="status" label="状态" width="120">
+              <template #default="{ row }">
+                <el-tag :type="statusType(row.status)">{{ statusLabel(row.status) }}</el-tag>
+              </template>
+            </el-table-column>
             <el-table-column prop="remark" label="备注" min-width="180" />
           </el-table>
+          <div class="page-pagination-right">
+            <el-pagination
+              v-model:current-page="query.pageNo"
+              v-model:page-size="query.pageSize"
+              :total="total"
+              :page-sizes="[10, 20, 50, 100]"
+              layout="total, sizes, prev, pager, next, jumper"
+              @size-change="handleSizeChange"
+              @current-change="fetchBindings"
+            />
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -36,6 +51,11 @@ import { createFamilyBinding, myFamilyBindings, type FamilyBindingReq, type Fami
 import { ElMessage } from 'element-plus'
 
 const bindings = ref<FamilyBindingVO[]>([])
+const total = ref(0)
+const query = reactive({
+  pageNo: 1,
+  pageSize: 10,
+})
 const form = reactive<FamilyBindingReq>({
   elderUserId: undefined,
   relationLabel: '女儿',
@@ -45,14 +65,38 @@ const form = reactive<FamilyBindingReq>({
 })
 
 const fetchBindings = async () => {
-  const res = await myFamilyBindings({ pageNo: 1, pageSize: 100 })
-  if (res.success) bindings.value = res.data.list
+  const res = await myFamilyBindings(query)
+  if (res.success) {
+    bindings.value = res.data.list
+    total.value = res.data.total
+  }
+}
+
+const handleSizeChange = () => {
+  query.pageNo = 1
+  fetchBindings()
 }
 
 const submitBinding = async () => {
   await createFamilyBinding(form)
   ElMessage.success('绑定申请已提交')
   fetchBindings()
+}
+
+const statusLabel = (status: string) => {
+  const map: Record<string, string> = {
+    ACTIVE: '已绑定',
+    PENDING: '待审核',
+    REJECTED: '已拒绝',
+  }
+  return map[status] || status
+}
+
+const statusType = (status: string) => {
+  if (status === 'ACTIVE') return 'success'
+  if (status === 'PENDING') return 'warning'
+  if (status === 'REJECTED') return 'danger'
+  return 'info'
 }
 
 onMounted(fetchBindings)

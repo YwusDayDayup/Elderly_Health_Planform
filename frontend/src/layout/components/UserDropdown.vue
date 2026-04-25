@@ -1,7 +1,7 @@
 <template>
   <el-dropdown @command="handleCommand">
     <div class="avatar-wrapper common-flex-center">
-      <el-avatar :size="32" class="user-avatar">
+      <el-avatar :size="32" :src="userInfo?.avatarUrl" class="user-avatar">
         {{ (userInfo?.nickname || userInfo?.username)?.charAt(0) }}
       </el-avatar>
       <div class="user-info-text">

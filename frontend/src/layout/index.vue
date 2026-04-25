@@ -80,9 +80,7 @@ const handleLogout = () => {
 }
 
 onMounted(() => {
-  userStore.fetchMe().then(() => {
-    localStorage.setItem('userRole', userStore.userInfo?.role || 'ELDER')
-  })
+  userStore.fetchMe()
 })
 </script>
 

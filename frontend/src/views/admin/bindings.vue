@@ -33,6 +33,17 @@
                 </template>
               </el-table-column>
             </el-table>
+            <div class="page-pagination-right">
+              <el-pagination
+                v-model:current-page="bindingQuery.pageNo"
+                v-model:page-size="bindingQuery.pageSize"
+                :total="bindingTotal"
+                :page-sizes="[10, 20, 50, 100]"
+                layout="total, sizes, prev, pager, next, jumper"
+                @size-change="handleBindingSizeChange"
+                @current-change="fetchBindings"
+              />
+            </div>
           </div>
         </div>
       </el-col>
@@ -62,6 +73,17 @@
                 </template>
               </el-table-column>
             </el-table>
+            <div class="page-pagination-right">
+              <el-pagination
+                v-model:current-page="staffQuery.pageNo"
+                v-model:page-size="staffQuery.pageSize"
+                :total="staffTotal"
+                :page-sizes="[10, 20, 50, 100]"
+                layout="total, sizes, prev, pager, next, jumper"
+                @size-change="handleStaffSizeChange"
+                @current-change="fetchStaffProfiles"
+              />
+            </div>
           </div>
         </div>
       </el-col>
@@ -95,31 +117,64 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { Connection, User } from '@element-plus/icons-vue'
 import { auditAdminStaffProfile, listAdminFamilyBindings, listAdminStaffProfiles, type FamilyBindingVO, type StaffProfileVO } from '@/api/care'
 import { ElMessage } from 'element-plus'
 
 const bindings = ref<FamilyBindingVO[]>([])
+const bindingTotal = ref(0)
+const bindingQuery = reactive({
+  pageNo: 1,
+  pageSize: 10,
+})
+
 const staffProfiles = ref<StaffProfileVO[]>([])
+const staffTotal = ref(0)
+const staffQuery = reactive({
+  pageNo: 1,
+  pageSize: 10,
+})
+
 const bindingDetailVisible = ref(false)
 const staffDetailVisible = ref(false)
 const currentBinding = ref<FamilyBindingVO | null>(null)
 const currentStaff = ref<StaffProfileVO | null>(null)
 
+const fetchBindings = async () => {
+  const res = await listAdminFamilyBindings(bindingQuery)
+  if (res.success) {
+    bindings.value = res.data.list
+    bindingTotal.value = res.data.total
+  }
+}
+
+const fetchStaffProfiles = async () => {
+  const res = await listAdminStaffProfiles(staffQuery)
+  if (res.success) {
+    staffProfiles.value = res.data.list
+    staffTotal.value = res.data.total
+  }
+}
+
 const fetchData = async () => {
-  const [bindingRes, staffRes] = await Promise.all([
-    listAdminFamilyBindings({ pageNo: 1, pageSize: 100 }),
-    listAdminStaffProfiles({ pageNo: 1, pageSize: 100 }),
-  ])
-  if (bindingRes.success) bindings.value = bindingRes.data.list
-  if (staffRes.success) staffProfiles.value = staffRes.data.list
+  await Promise.all([fetchBindings(), fetchStaffProfiles()])
+}
+
+const handleBindingSizeChange = () => {
+  bindingQuery.pageNo = 1
+  fetchBindings()
+}
+
+const handleStaffSizeChange = () => {
+  staffQuery.pageNo = 1
+  fetchStaffProfiles()
 }
 
 const audit = async (id: number, status: string) => {
   await auditAdminStaffProfile(id, status)
   ElMessage.success('审核状态已更新')
-  fetchData()
+  fetchStaffProfiles()
 }
 
 const showBindingDetail = (row: FamilyBindingVO) => {

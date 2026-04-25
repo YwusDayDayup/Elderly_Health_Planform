@@ -15,7 +15,12 @@
       </div>
       <div class="admin-zone__toolbar">
         <el-form :inline="true">
-          <el-form-item label="状态"><el-input v-model="query.status" placeholder="如 OPEN" clearable /></el-form-item>
+          <el-form-item label="处理状态">
+            <el-select v-model="query.status" placeholder="全部状态" clearable style="width: 140px">
+              <el-option label="待处理" value="OPEN" />
+              <el-option label="已处理" value="CLOSED" />
+            </el-select>
+          </el-form-item>
           <el-form-item><el-button type="primary" @click="fetchAlerts">查询</el-button></el-form-item>
         </el-form>
       </div>
@@ -46,6 +51,17 @@
             </template>
           </el-table-column>
         </el-table>
+        <div class="page-pagination-right">
+          <el-pagination
+            v-model:current-page="query.pageNo"
+            v-model:page-size="query.pageSize"
+            :total="total"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            @size-change="handleSizeChange"
+            @current-change="fetchAlerts"
+          />
+        </div>
       </div>
     </div>
 
@@ -70,13 +86,22 @@ import { Warning } from '@element-plus/icons-vue'
 import { listAdminHealthAlerts, type HealthAlertVO } from '@/api/care'
 
 const alerts = ref<HealthAlertVO[]>([])
-const query = reactive({ status: '' })
+const total = ref(0)
+const query = reactive({ status: '', pageNo: 1, pageSize: 10 })
 const detailVisible = ref(false)
 const currentAlert = ref<HealthAlertVO | null>(null)
 
 const fetchAlerts = async () => {
-  const res = await listAdminHealthAlerts({ pageNo: 1, pageSize: 100, ...query })
-  if (res.success) alerts.value = res.data.list
+  const res = await listAdminHealthAlerts(query)
+  if (res.success) {
+    alerts.value = res.data.list
+    total.value = res.data.total
+  }
+}
+
+const handleSizeChange = (size: number) => {
+  query.pageSize = size
+  fetchAlerts()
 }
 
 const showDetail = (row: HealthAlertVO) => {

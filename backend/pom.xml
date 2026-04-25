@@ -11,11 +11,11 @@
     <relativePath />
   </parent>
 
-  <groupId>com.example</groupId>
-  <artifactId>example</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>example</name>
-  <description>Spring Boot 3 example base</description>
+  <groupId>com.huiyanghome</groupId>
+  <artifactId>huiyang-home</artifactId>
+  <version>1.0.0</version>
+  <name>huiyang-home</name>
+  <description>慧养家园 - 智慧养老服务平台后端</description>
 
   <properties>
     <java.version>21</java.version>

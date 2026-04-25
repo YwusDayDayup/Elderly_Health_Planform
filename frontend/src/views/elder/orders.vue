@@ -25,6 +25,17 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="page-pagination-right">
+        <el-pagination
+          v-model:current-page="query.pageNo"
+          v-model:page-size="query.pageSize"
+          :total="total"
+          :page-sizes="[10, 20, 50]"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="fetchOrders"
+        />
+      </div>
     </el-card>
 
     <el-dialog v-model="rateVisible" title="服务评价" width="420px">
@@ -46,13 +57,23 @@ import { cancelServiceOrder, myServiceOrders, payServiceOrder, rateServiceOrder,
 import { ElMessage } from 'element-plus'
 
 const orders = ref<ServiceOrderVO[]>([])
+const total = ref(0)
+const query = reactive({ pageNo: 1, pageSize: 10 })
 const rateVisible = ref(false)
 const currentId = ref<number>()
 const rateForm = reactive({ rating: 5, ratingContent: '' })
 
 const fetchOrders = async () => {
-  const res = await myServiceOrders({ pageNo: 1, pageSize: 100 })
-  if (res.success) orders.value = res.data.list
+  const res = await myServiceOrders(query)
+  if (res.success) {
+    orders.value = res.data.list
+    total.value = res.data.total
+  }
+}
+
+const handleSizeChange = (size: number) => {
+  query.pageSize = size
+  fetchOrders()
 }
 
 const handlePay = async (id: number) => {

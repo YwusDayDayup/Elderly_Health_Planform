@@ -65,6 +65,17 @@
               </template>
             </el-table-column>
           </el-table>
+            <div class="page-pagination-right">
+              <el-pagination
+                v-model:current-page="query.pageNo"
+                v-model:page-size="query.pageSize"
+                :total="total"
+                :page-sizes="[10, 20, 50, 100]"
+                layout="total, sizes, prev, pager, next, jumper"
+                @size-change="handleSizeChange"
+                @current-change="fetchOrders"
+              />
+            </div>
         </el-card>
       </el-col>
     </el-row>
@@ -72,14 +83,27 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { myServiceOrders, type ServiceOrderVO } from '@/api/care'
 
 const orders = ref<ServiceOrderVO[]>([])
+const total = ref(0)
+const query = reactive({
+  pageNo: 1,
+  pageSize: 10,
+})
 
 const fetchOrders = async () => {
-  const res = await myServiceOrders({ pageNo: 1, pageSize: 100 })
-  if (res.success) orders.value = res.data.list
+  const res = await myServiceOrders(query)
+  if (res.success) {
+    orders.value = res.data.list
+    total.value = res.data.total
+  }
+}
+
+const handleSizeChange = () => {
+  query.pageNo = 1
+  fetchOrders()
 }
 
 const sortedOrders = computed(() => {

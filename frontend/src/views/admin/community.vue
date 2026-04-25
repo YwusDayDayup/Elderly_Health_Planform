@@ -63,6 +63,17 @@
             </template>
           </el-table-column>
         </el-table>
+        <div class="page-pagination-right">
+          <el-pagination
+            v-model:current-page="query.pageNo"
+            v-model:page-size="query.pageSize"
+            :total="total"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            @size-change="handleSizeChange"
+            @current-change="fetchPosts"
+          />
+        </div>
       </div>
     </div>
 
@@ -88,13 +99,28 @@ import { listAdminCommunityPosts, type CommunityPostVO } from '@/api/care'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 const posts = ref<CommunityPostVO[]>([])
+const total = ref(0)
 const detailVisible = ref(false)
 const currentPost = ref<CommunityPostVO | null>(null)
-const query = reactive({ keyword: '', type: '', status: '' })
+const query = reactive({ 
+  keyword: '', 
+  type: '', 
+  status: '',
+  pageNo: 1,
+  pageSize: 10,
+})
 
 const fetchPosts = async () => {
-  const res = await listAdminCommunityPosts({ pageNo: 1, pageSize: 100, ...query })
-  if (res.success) posts.value = res.data.list
+  const res = await listAdminCommunityPosts(query)
+  if (res.success) {
+    posts.value = res.data.list
+    total.value = res.data.total
+  }
+}
+
+const handleSizeChange = () => {
+  query.pageNo = 1
+  fetchPosts()
 }
 
 const showDetail = (row: CommunityPostVO) => {

@@ -52,32 +52,24 @@ watch(() => props.modelValue, (newVal) => {
 })
 
 const handleUploadSuccess = (response: any) => {
-  // 因为 request.ts 拦截器已经处理了 success 判断
-  // 如果进入这里说明已经是成功的响应，response 就是后端返回的完整 Result 对象
-  if (response && response.success) {
-    const resData = response.data
-    const newImageUrl = resData.url || resData.avatarUrl
-    imageUrl.value = newImageUrl
-    emit('update:modelValue', newImageUrl)
+  // 拦截器已经验证过 success，能进入这里说明上传成功
+  if (response?.data?.url) {
+    imageUrl.value = response.data.url
+    emit('update:modelValue', response.data.url)
     emit('onSuccess', response)
     ElMessage.success('上传成功')
-  } else {
-    ElMessage.error(response?.message || '上传失败')
-    emit('onError', response)
   }
 }
 
-const handleUploadError = (error: Error) => {
-  ElMessage.error('上传失败，请重试！')
+const handleUploadError = (error: any) => {
+  // 拦截器已经显示了错误消息，这里不再重复显示
   emit('onError', error)
 }
 
 const httpRequest = async (options: UploadRequestOptions) => {
   try {
     const file = options.file as File
-    // 统一 RESTful 上传：通过 bizType 区分头像等业务类型
     const res = await uploadFile(file, props.bizType || undefined)
-
     options.onSuccess?.(res as any)
   } catch (e) {
     options.onError?.(e as any)

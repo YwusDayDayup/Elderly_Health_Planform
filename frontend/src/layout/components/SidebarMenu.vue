@@ -9,8 +9,8 @@
         </svg>
       </div>
       <div v-if="!isCollapse" class="logo-copy">
-        <strong class="logo-title">社区服务</strong>
-        <span class="logo-subtitle">Community Care</span>
+        <strong class="logo-title">慧养家园</strong>
+        <span class="logo-subtitle">Smart Care Home</span>
       </div>
     </div>
     <el-scrollbar>

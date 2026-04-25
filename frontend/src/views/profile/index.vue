@@ -34,6 +34,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { updateProfile } from '@/api/user'
 import ImageUpload from '@/components/ImageUpload/index.vue'
 import UserInfo from './components/UserInfo.vue'
 
@@ -41,8 +42,19 @@ const userStore = useUserStore()
 const activeTab = ref('info')
 
 const handleAvatarSuccess = (res: any) => {
-  // ImageUpload 内部已经更新了 v-model，但我们可以同步到 store
-  userStore.setUserInfo({ avatarUrl: res.data.url })
+  // 上传成功后，更新 store 中的头像 URL
+  if (res && res.data && res.data.url) {
+    userStore.setUserInfo({ avatarUrl: res.data.url })
+    // 立即保存到后端
+    updateProfile({
+      avatarUrl: res.data.url
+    }).then((updateRes) => {
+      if (updateRes.success) {
+        // 重新获取用户信息以确保同步
+        userStore.fetchMe()
+      }
+    })
+  }
 }
 </script>
 

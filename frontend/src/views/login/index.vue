@@ -18,7 +18,7 @@
               <circle cx="16" cy="16" r="4" fill="currentColor"/>
             </svg>
           </div>
-          <span class="logo-text">社区老人服务</span>
+          <span class="logo-text">慧养家园</span>
         </div>
 
         <div class="brand-hero">
@@ -119,12 +119,42 @@
 
             <div class="form-options">
               <el-checkbox v-model="rememberMe">记住我</el-checkbox>
-              <a href="#" class="forgot-link">忘记密码？</a>
             </div>
 
             <el-button type="primary" class="submit-btn" size="large" :loading="loading" @click="handleLogin">
               登录系统
             </el-button>
+
+            <!-- 快速登录按钮 - 仅供调试使用 -->
+            <!-- TODO: 项目完成后删除此部分 -->
+            <div v-if="showQuickLogin" class="quick-login-wrapper">
+              <el-divider>快速登录（调试）</el-divider>
+              <div class="quick-login-section">
+                <el-button
+                  v-for="user in quickLoginUsers"
+                  :key="user.username"
+                  :type="user.type"
+                  size="small"
+                  @click="handleQuickLogin(user.username, user.password)"
+                  class="quick-login-btn"
+                >
+                  {{ user.label }}
+                </el-button>
+              </div>
+            </div>
+
+            <!-- 快速登录显示/隐藏按钮 -->
+            <!-- TODO: 项目完成后删除此部分 -->
+            <div class="quick-login-toggle">
+              <el-button
+                text
+                size="small"
+                @click="showQuickLogin = !showQuickLogin"
+                class="toggle-btn"
+              >
+                {{ showQuickLogin ? '隐藏' : '显示' }}快速登录
+              </el-button>
+            </div>
           </el-form>
 
           <!-- 注册表单 -->
@@ -229,39 +259,41 @@ import { getRoleHomePath } from '@/utils/role'
 type AuthTab = 'login' | 'register'
 
 // 图标组件
+import { h } from 'vue'
+
 const HeartIcon = {
-  template: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-  </svg>`
+  render: () => h('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2 }, [
+    h('path', { d: 'M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z' })
+  ])
 }
 
 const ShieldIcon = {
-  template: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
-    <path d="m9 12 2 2 4-4"/>
-  </svg>`
+  render: () => h('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2 }, [
+    h('path', { d: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10' }),
+    h('path', { d: 'm9 12 2 2 4-4' })
+  ])
 }
 
 const UsersIcon = {
-  template: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-    <circle cx="9" cy="7" r="4"/>
-    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-  </svg>`
+  render: () => h('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2 }, [
+    h('path', { d: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' }),
+    h('circle', { cx: 9, cy: 7, r: 4 }),
+    h('path', { d: 'M22 21v-2a4 4 0 0 0-3-3.87' }),
+    h('path', { d: 'M16 3.13a4 4 0 0 1 0 7.75' })
+  ])
 }
 
 const ClockIcon = {
-  template: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <circle cx="12" cy="12" r="10"/>
-    <polyline points="12 6 12 12 16 14"/>
-  </svg>`
+  render: () => h('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2 }, [
+    h('circle', { cx: 12, cy: 12, r: 10 }),
+    h('polyline', { points: '12 6 12 12 16 14' })
+  ])
 }
 
 const features = [
   { icon: HeartIcon, title: '贴心服务', desc: '家政、医护、生活照料全覆盖' },
   { icon: ShieldIcon, title: '安全保障', desc: '健康数据实时监测与预警' },
-  { icon: UsersIcon, title: '家属协同', desc: '多远同步，关怀时刻在线' },
+  { icon: UsersIcon, title: '家属协同', desc: '多端同步，关怀时刻在线' },
   { icon: ClockIcon, title: '及时响应', desc: '7×24小时服务响应机制' },
 ]
 
@@ -272,6 +304,16 @@ const userStore = useUserStore()
 const activeTab = ref<AuthTab>(route.path === '/register' ? 'register' : 'login')
 const loading = ref(false)
 const rememberMe = ref(false)
+
+// 快速登录用户列表 - 仅供调试使用
+// TODO: 项目完成后删除此部分
+const showQuickLogin = ref(false)
+const quickLoginUsers = [
+  { username: 'admin', password: '123456', label: '管理员', type: 'danger' },
+  { username: 'demo_elder_1', password: '123456', label: '老人', type: 'primary' },
+  { username: 'demo_staff_1', password: '123456', label: '服务人员', type: 'success' },
+  { username: 'demo_family_1', password: '123456', label: '家属', type: 'warning' },
+]
 
 const loginFormRef = ref<FormInstance>()
 const loginForm = reactive({
@@ -371,6 +413,14 @@ const handleRegister = async () => {
       loading.value = false
     }
   })
+}
+
+// 快速登录函数 - 仅供调试使用
+// TODO: 项目完成后删除此函数
+const handleQuickLogin = async (username: string, password: string) => {
+  loginForm.username = username
+  loginForm.password = password
+  await handleLogin()
 }
 </script>
 
@@ -732,24 +782,13 @@ const handleRegister = async () => {
 
 .form-options {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 24px;
 
   :deep(.el-checkbox__label) {
     color: var(--white-600);
     font-size: 0.88rem;
-  }
-}
-
-.forgot-link {
-  font-size: 0.88rem;
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 500;
-
-  &:hover {
-    text-decoration: underline;
   }
 }
 
@@ -774,6 +813,44 @@ const handleRegister = async () => {
   &:active {
     transform: translateY(0);
   }
+}
+
+// 快速登录区域样式 - 仅供调试使用
+// TODO: 项目完成后删除此部分
+.quick-login-wrapper {
+  margin-top: 8px;
+}
+
+.quick-login-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+
+  .quick-login-btn {
+    width: 100%;
+  }
+}
+
+.quick-login-toggle {
+  margin-top: 16px;
+  text-align: center;
+
+  .toggle-btn {
+    font-size: 12px;
+    color: var(--white-500);
+    padding: 4px 8px;
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+:deep(.el-divider__text) {
+  font-size: 12px;
+  color: var(--white-500);
+  background: linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 100%);
 }
 
 .form-footer {

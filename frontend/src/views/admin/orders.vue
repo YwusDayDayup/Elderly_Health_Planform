@@ -11,7 +11,18 @@
       <div class="admin-zone__toolbar">
         <el-form :inline="true">
           <el-form-item label="关键字"><el-input v-model="query.keyword" placeholder="服务名称" clearable /></el-form-item>
-          <el-form-item label="状态"><el-input v-model="query.status" placeholder="如 PENDING_ASSIGN" clearable /></el-form-item>
+          <el-form-item label="订单状态">
+            <el-select v-model="query.status" placeholder="全部状态" clearable style="width: 160px">
+              <el-option label="待支付" value="PENDING_PAYMENT" />
+              <el-option label="待派单" value="PENDING_ASSIGN" />
+              <el-option label="待接单" value="PENDING_ACCEPT" />
+              <el-option label="待上门" value="PENDING_SERVICE" />
+              <el-option label="服务中" value="IN_SERVICE" />
+              <el-option label="已完成" value="COMPLETED" />
+              <el-option label="已取消" value="CANCELLED" />
+              <el-option label="已退款" value="REFUNDED" />
+            </el-select>
+          </el-form-item>
           <el-form-item><el-button type="primary" @click="fetchOrders">查询</el-button></el-form-item>
         </el-form>
       </div>
@@ -39,6 +50,17 @@
             </template>
           </el-table-column>
         </el-table>
+        <div class="page-pagination-right">
+          <el-pagination
+            v-model:current-page="query.pageNo"
+            v-model:page-size="query.pageSize"
+            :total="total"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            @size-change="handleSizeChange"
+            @current-change="fetchOrders"
+          />
+        </div>
       </div>
     </div>
 
@@ -81,8 +103,9 @@ import { assignAdminServiceOrder, listAdminServiceOrders, type ServiceOrderVO } 
 import { adminUserPage, type AdminUserVO } from '@/api/user'
 import { ElMessage } from 'element-plus'
 
-const query = reactive({ keyword: '', status: '' })
+const query = reactive({ keyword: '', status: '', pageNo: 1, pageSize: 10 })
 const orders = ref<ServiceOrderVO[]>([])
+const total = ref(0)
 const staffOptions = ref<AdminUserVO[]>([])
 const assignVisible = ref(false)
 const detailVisible = ref(false)
@@ -90,8 +113,16 @@ const currentOrder = ref<ServiceOrderVO | null>(null)
 const assignStaffUserId = ref<number>()
 
 const fetchOrders = async () => {
-  const res = await listAdminServiceOrders({ pageNo: 1, pageSize: 100, ...query })
-  if (res.success) orders.value = res.data.list
+  const res = await listAdminServiceOrders(query)
+  if (res.success) {
+    orders.value = res.data.list
+    total.value = res.data.total
+  }
+}
+
+const handleSizeChange = (size: number) => {
+  query.pageSize = size
+  fetchOrders()
 }
 
 const fetchStaffUsers = async () => {

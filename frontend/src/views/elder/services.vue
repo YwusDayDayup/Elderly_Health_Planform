@@ -3,7 +3,7 @@
     <div class="page-head">
       <div>
         <p class="page-kicker">服务大厅</p>
-        <h2>社区老人服务预约</h2>
+        <h2>慧养家园服务预约</h2>
         <span>在线浏览家政、跑腿、基础医护等项目并发起预约。</span>
       </div>
     </div>
@@ -28,6 +28,17 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="page-pagination-right">
+        <el-pagination
+          v-model:current-page="query.pageNo"
+          v-model:page-size="query.pageSize"
+          :total="total"
+          :page-sizes="[10, 20, 50]"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="fetchProjects"
+        />
+      </div>
     </el-card>
 
     <el-dialog v-model="dialogVisible" title="预约服务" width="560px">
@@ -58,9 +69,10 @@ import { useUserStore } from '@/stores/user'
 const userStore = useUserStore()
 const categories = ref<ServiceCategoryVO[]>([])
 const projects = ref<ServiceProjectVO[]>([])
+const total = ref(0)
 const currentProject = ref<ServiceProjectVO | null>(null)
 const dialogVisible = ref(false)
-const query = reactive({ categoryId: undefined as number | undefined, keyword: '' })
+const query = reactive({ categoryId: undefined as number | undefined, keyword: '', pageNo: 1, pageSize: 10 })
 const orderForm = reactive({
   serviceTime: '',
   serviceAddress: '',
@@ -75,8 +87,16 @@ const fetchCategories = async () => {
 }
 
 const fetchProjects = async () => {
-  const res = await listPublicServiceProjects({ pageNo: 1, pageSize: 100, ...query })
-  if (res.success) projects.value = res.data.list
+  const res = await listPublicServiceProjects(query)
+  if (res.success) {
+    projects.value = res.data.list
+    total.value = res.data.total
+  }
+}
+
+const handleSizeChange = (size: number) => {
+  query.pageSize = size
+  fetchProjects()
 }
 
 const openOrder = (row: ServiceProjectVO) => {

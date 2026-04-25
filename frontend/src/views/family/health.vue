@@ -22,17 +22,33 @@
           <template #default="{ row }"><el-tag :type="row.abnormalFlag ? 'danger' : 'success'">{{ row.abnormalFlag ? '异常' : '正常' }}</el-tag></template>
         </el-table-column>
       </el-table>
+      <div class="page-pagination-right">
+        <el-pagination
+          v-model:current-page="query.pageNo"
+          v-model:page-size="query.pageSize"
+          :total="total"
+          :page-sizes="[10, 20, 50, 100]"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="fetchRecords"
+        />
+      </div>
     </el-card>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { myFamilyBindings, myHealthRecords, type FamilyBindingVO, type HealthRecordVO } from '@/api/care'
 
 const bindings = ref<FamilyBindingVO[]>([])
 const records = ref<HealthRecordVO[]>([])
+const total = ref(0)
 const targetUserId = ref<number>()
+const query = reactive({
+  pageNo: 1,
+  pageSize: 10,
+})
 
 const activeBindings = computed(() => bindings.value.filter(item => item.status === 'ACTIVE'))
 
@@ -49,8 +65,16 @@ const fetchBindings = async () => {
 
 const fetchRecords = async () => {
   if (!targetUserId.value) return
-  const res = await myHealthRecords({ pageNo: 1, pageSize: 100, targetUserId: targetUserId.value })
-  if (res.success) records.value = res.data.list
+  const res = await myHealthRecords({ ...query, targetUserId: targetUserId.value })
+  if (res.success) {
+    records.value = res.data.list
+    total.value = res.data.total
+  }
+}
+
+const handleSizeChange = () => {
+  query.pageNo = 1
+  fetchRecords()
 }
 
 onMounted(fetchBindings)

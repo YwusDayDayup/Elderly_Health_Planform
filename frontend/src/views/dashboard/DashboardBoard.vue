@@ -8,7 +8,7 @@
             <span class="kicker-dot"></span>
             {{ formatRole(data?.role) }}
           </p>
-          <h2>{{ data?.title || '社区老人服务系统' }}</h2>
+          <h2>{{ data?.title || '慧养家园服务系统' }}</h2>
           <p class="hero-desc">围绕服务预约、健康记录、家属协同与系统治理组织日常工作与生活服务。</p>
         </div>
         <div class="hero-decoration">
@@ -177,7 +177,7 @@
           <el-table :data="data?.latestContents || []" size="small" class="modern-table">
             <el-table-column prop="contentType" label="类型" width="100">
               <template #default="{ row }">
-                <span class="type-badge">{{ row.contentType }}</span>
+                <span class="type-badge">{{ contentTypeLabel(row.contentType) }}</span>
               </template>
             </el-table-column>
             <el-table-column prop="title" label="标题" min-width="220" />
@@ -200,7 +200,7 @@
             <div v-for="item in data?.latestOrders || []" :key="item.id" class="mini-item">
               <div class="mini-item-main">
                 <strong>{{ item.serviceName }}</strong>
-                <span>{{ item.orderStatus }} · {{ item.serviceTime }}</span>
+                <span>{{ orderStatusLabelMap[item.orderStatus] || item.orderStatus }} · {{ item.serviceTime }}</span>
               </div>
               <div class="mini-item-arrow">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -256,7 +256,7 @@
               </div>
               <div class="mini-item-main">
                 <strong>{{ item.elderName }} / {{ item.familyName }}</strong>
-                <span>{{ item.relationLabel }} · {{ item.status }}</span>
+                <span>{{ item.relationLabel }} · {{ bindingStatusLabelMap[item.status] || item.status }}</span>
               </div>
             </div>
             <el-empty v-if="!(data?.latestBindings || []).length" description="暂无绑定数据" :image-size="60" />
@@ -536,6 +536,17 @@ const orderStatusLabelMap: Record<string, string> = {
   COMPLETED: '已完成',
   CANCELLED: '已取消',
   REFUNDED: '已退款',
+}
+
+const contentTypeLabel = (type: string) => {
+  const map: Record<string, string> = {
+    NOTICE: '公告',
+    NEWS: '新闻',
+    ACTIVITY: '活动',
+    HEALTH: '健康',
+    POLICY: '政策',
+  }
+  return map[type] || type
 }
 
 const renderElderOrderChart = async () => {

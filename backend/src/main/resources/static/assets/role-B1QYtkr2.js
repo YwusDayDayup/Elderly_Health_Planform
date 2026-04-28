@@ -1,0 +1,1 @@
+const e={ADMIN:"管理员",ELDER:"老人用户",STAFF:"服务人员",FAMILY:"家属用户"};function n(r){return r?e[r]||r:"未分配角色"}function t(r){return r==="ADMIN"?"/admin/user":r==="STAFF"?"/staff/orders":r==="FAMILY"?"/family/bindings":"/elder/services"}export{n as f,t as g};

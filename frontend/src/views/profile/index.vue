@@ -47,6 +47,7 @@ const handleAvatarSuccess = (res: any) => {
     userStore.setUserInfo({ avatarUrl: res.data.url })
     // 立即保存到后端
     updateProfile({
+      nickname: userStore.userInfo?.nickname || '',
       avatarUrl: res.data.url
     }).then((updateRes) => {
       if (updateRes.success) {

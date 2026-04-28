@@ -21,7 +21,7 @@
 
 **截图插入位置 — 整体布局（桌面端，1440px）：**
 
-![image-20260425151545598](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151545598.png)
+![image-20260425151545598](./uiimages\image-20260425151545598.png)
 
 ```
 [ 请在此处插入整体布局截图 ]
@@ -63,7 +63,7 @@ el-aside
 
 **截图插入位置 — 侧边栏展开状态：**
 
-![image-20260425151621356](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151621356.png)
+![image-20260425151621356](./uiimages\image-20260425151621356.png)
 
 ```
 [ 请在此处插入侧边栏截图（展开） ]
@@ -71,7 +71,7 @@ el-aside
 
 **截图插入位置 — 侧边栏折叠状态（72px）：**
 
-![image-20260425151615806](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151615806.png)
+![image-20260425151615806](./uiimages\image-20260425151615806.png)
 
 ```
 [ 请在此处插入侧边栏截图（折叠） ]
@@ -101,7 +101,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 顶部栏：**
 
-![image-20260425151646516](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151646516.png)
+![image-20260425151646516](./uiimages\image-20260425151646516.png)
 
 ```
 [ 请在此处插入顶部栏截图 ]
@@ -135,9 +135,9 @@ el-header（height: 64px）
 
 **截图插入位置 — 登录页：**
 
-![image-20260425151442645](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151442645.png)
+![image-20260425211358298](.\uiimages\image-20260425211358298.png)
 
-![image-20260425151503830](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151503830.png)
+![image-20260425151503830](./uiimages\image-20260425151503830.png)
 
 ```
 
@@ -174,9 +174,9 @@ el-header（height: 64px）
 
 **截图插入位置 — 管理员工作台：**
 
-![image-20260425151703912](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151703912.png)
+![image-20260425151703912](./uiimages\image-20260425151703912.png)
 
-![image-20260425151718168](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151718168.png)
+![image-20260425151718168](./uiimages\image-20260425151718168.png)
 
 ```
 [ 请在此处插入管理员工作台截图 ]
@@ -184,23 +184,23 @@ el-header（height: 64px）
 
 **截图插入位置 — 老人工作台：**
 
-![image-20260425152357327](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152357327.png)
+![image-20260425152357327](./uiimages\image-20260425152357327.png)
 
-![](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152410746.png)
+![](./uiimages\image-20260425152410746.png)
 
 
 
 **截图插入位置 — 社区服务人员工作台：**
 
-![image-20260425152847260](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152847260.png)
+![image-20260425152847260](./uiimages\image-20260425152847260.png)
 
-![image-20260425152853422](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152853422.png)
+![image-20260425152853422](./uiimages\image-20260425152853422.png)
 
 **截图插入位置 — 老人家属工作台：**
 
-![image-20260425153149171](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153149171.png)
+![image-20260425153149171](./uiimages\image-20260425153149171.png)
 
-![image-20260425153159500](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153159500.png)
+![image-20260425153159500](./uiimages\image-20260425153159500.png)
 
 ---
 
@@ -242,7 +242,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 用户管理列表：**
 
-![image-20260425151734085](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151734085.png)
+![image-20260425151734085](./uiimages\image-20260425151734085.png)
 
 ```
 [ 请在此处插入用户管理页截图 ]
@@ -250,7 +250,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 新增/编辑用户弹窗：**
 
-![image-20260425151751653](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151751653.png)
+![image-20260425151751653](./uiimages\image-20260425151751653.png)
 
 ```
 [ 请在此处插入用户编辑弹窗截图 ]
@@ -282,9 +282,9 @@ el-header（height: 64px）
 
 **截图插入位置 — 服务管理页：**
 
-![image-20260425151818375](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151818375.png)
+![image-20260425151818375](./uiimages\image-20260425151818375.png)
 
-![image-20260425151830094](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151830094.png)
+![image-20260425151830094](./uiimages\image-20260425151830094.png)
 
 ```
 [ 请在此处插入服务管理页截图 ]
@@ -310,7 +310,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 内容管理页：**
 
-![image-20260425151840681](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151840681.png)
+![image-20260425151840681](./uiimages\image-20260425151840681.png)
 
 ```
 [ 请在此处插入内容管理页截图 ]
@@ -333,7 +333,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 社区互动页：**
 
-![image-20260425151853035](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151853035.png)
+![image-20260425151853035](./uiimages\image-20260425151853035.png)
 
 ```
 [ 请在此处插入社区互动页截图 ]
@@ -368,7 +368,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 订单调度页：**
 
-![image-20260425151906892](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151906892.png)
+![image-20260425151906892](./uiimages\image-20260425151906892.png)
 
 ```
 [ 请在此处插入订单调度页截图 ]
@@ -391,7 +391,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 健康预警页：**
 
-![image-20260425151915982](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151915982.png)
+![image-20260425151915982](./uiimages\image-20260425151915982.png)
 
 ```
 [ 请在此处插入健康预警页截图 ]
@@ -412,7 +412,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 家属绑定页：**
 
-![image-20260425151923649](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151923649.png)
+![image-20260425151923649](./uiimages\image-20260425151923649.png)
 
 ```
 [ 请在此处插入家属绑定页截图 ]
@@ -435,7 +435,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 消息管理页：**
 
-![image-20260425151946488](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425151946488.png)
+![image-20260425151946488](./uiimages\image-20260425151946488.png)
 
 ```
 [ 请在此处插入消息管理页截图 ]
@@ -460,9 +460,9 @@ el-header（height: 64px）
 
 **截图插入位置 — 系统监控页：**
 
-![image-20260425152006441](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152006441.png)
+![image-20260425152006441](./uiimages\image-20260425152006441.png)
 
-![image-20260425152015685](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152015685.png)
+![image-20260425152015685](./uiimages\image-20260425152015685.png)
 
 ```
 [ 请在此处插入系统监控页截图 ]
@@ -490,7 +490,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 服务大厅：**
 
-![image-20260425152223965](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152223965.png)
+![image-20260425152223965](./uiimages\image-20260425152223965.png)
 
 ```
 [ 请在此处插入服务大厅截图 ]
@@ -511,7 +511,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 我的订单（老人）：**
 
-![image-20260425152240153](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152240153.png)
+![image-20260425152240153](./uiimages\image-20260425152240153.png)
 
 ```
 [ 请在此处插入老人订单页截图 ]
@@ -532,7 +532,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 健康管理：**
 
-![image-20260425152257440](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152257440.png)
+![image-20260425152257440](./uiimages\image-20260425152257440.png)
 
 ```
 [ 请在此处插入健康管理页截图 ]
@@ -551,7 +551,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 资讯活动：**
 
-![image-20260425152309154](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152309154.png)
+![image-20260425152309154](./uiimages\image-20260425152309154.png)
 
 ```
 [ 请在此处插入资讯活动页截图 ]
@@ -571,7 +571,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 家属授权：**
 
-![image-20260425152317411](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152317411.png)
+![image-20260425152317411](./uiimages\image-20260425152317411.png)
 
 ```
 [ 请在此处插入家属授权页截图 ]
@@ -590,7 +590,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 位置安全：**
 
-![image-20260425152323422](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152323422.png)
+![image-20260425152323422](./uiimages\image-20260425152323422.png)
 
 ```
 [ 请在此处插入位置安全页截图 ]
@@ -613,7 +613,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 接单中心：**
 
-![image-20260425152919547](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152919547.png)
+![image-20260425152919547](./uiimages\image-20260425152919547.png)
 
 ```
 [ 请在此处插入接单中心截图 ]
@@ -632,7 +632,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 服务档案：**
 
-![image-20260425152929351](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152929351.png)
+![image-20260425152929351](./uiimages\image-20260425152929351.png)
 
 ```
 [ 请在此处插入服务档案截图 ]
@@ -650,7 +650,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 日程管理：**
 
-![image-20260425152941905](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425152941905.png)
+![image-20260425152941905](./uiimages\image-20260425152941905.png)
 
 
 
@@ -670,7 +670,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 绑定管理：**
 
-![image-20260425153224644](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153224644.png)
+![image-20260425153224644](./uiimages\image-20260425153224644.png)
 
 ```
 [ 请在此处插入绑定管理截图 ]
@@ -690,7 +690,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 健康监测：**
 
-![image-20260425153247343](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153247343.png)
+![image-20260425153247343](./uiimages\image-20260425153247343.png)
 
 ```
 [ 请在此处插入健康监测截图 ]
@@ -708,7 +708,7 @@ el-header（height: 64px）
 ```
 
 **截图插入位置 — 服务同步：**
-![image-20260425153255877](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153255877.png)
+![image-20260425153255877](./uiimages\image-20260425153255877.png)
 
 ```
 [ 请在此处插入服务同步截图 ]
@@ -725,7 +725,7 @@ el-header（height: 64px）
 ```
 
 **截图插入位置 — 位置查看：**
-![image-20260425153307128](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153307128.png)
+![image-20260425153307128](./uiimages\image-20260425153307128.png)
 
 ```
 [ 请在此处插入位置查看截图 ]
@@ -751,7 +751,7 @@ el-header（height: 64px）
 
 **截图插入位置 — 个人中心：**
 
-![image-20260425153331049](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153331049.png)
+![image-20260425153331049](./uiimages\image-20260425153331049.png)
 
 ```
 [ 请在此处插入个人中心截图 ]
@@ -780,13 +780,13 @@ el-header（height: 64px）
 
 点击顶部消息按钮：
 
-![image-20260425153444284](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153444284.png)
+![image-20260425153444284](./uiimages\image-20260425153444284.png)
 
-点击查看全部消息：![image-20260425153501756](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153501756.png)
+点击查看全部消息：![image-20260425153501756](./uiimages\image-20260425153501756.png)
 
 消息通知页面：
 
-![image-20260425153438586](C:\Users\Yiwu\AppData\Roaming\Typora\typora-user-images\image-20260425153438586.png)
+![image-20260425153438586](./uiimages\image-20260425153438586.png)
 
 ```
 [ 请在此处插入消息页截图 ]
